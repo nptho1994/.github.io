@@ -1,17 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Random Number Generator</title>
+  <title>Random</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
   <script>
-    function generateRandomNumber() {
-      var randomNumber = Math.floor(Math.random() * 100) + 1; // Generates a random number between 1 and 100
-      document.getElementById("result").innerHTML = "Random Number: " + randomNumber;
+    var integerList = []; // Initial empty list
+
+    function SetListRandom() {
+      var numMin = parseInt(document.getElementById("numMin").value);
+	  var numMax = parseInt(document.getElementById("numMax").value);
+      integerList = []; // Clear the previous list
+
+      for (var i = numMin; i <= numMax; i++) {
+        integerList.push(i);
+      }
+	    
+		displayList();	  
+		displayRandomValue();
+		var element = document.getElementById("showRandom");
+		if (integerList.length === 0) {
+			element.style.display = "none"; // Make the element visible
+		} else {
+			element.style.display = "block"; // Hide the element
+		}
+    }
+	
+	function Random() {
+		var listSize = integerList.length;
+		var randomNumber = Math.floor(Math.random() * listSize);		
+		randomValue = integerList[randomNumber];
+		integerList.splice(randomNumber, 1);
+		displayList();
+		displayRandomValue();
+		
+		var element = document.getElementById("showRandom");
+		if (integerList.length === 0) {
+			element.style.display = "none"; // Make the element visible
+		} else {
+			element.style.display = "block"; // Hide the element
+		}
+    }
+	
+    function displayList() {
+      var listElement = document.getElementById("integerList");
+      listElement.innerHTML = "The remainder number: " + integerList.length;
+    }
+
+	function displayRandomValue() {
+      var result = document.getElementById("randomValue");
+      result.innerHTML = "Random value: " + randomValue;
     }
   </script>
 </head>
-<body>
-  <h1>Random Number Generator</h1>
-  <button onclick="generateRandomNumber()">Generate Random Number</button>
-  <p id="result"></p>
-</body>
+	<body>
+		<div class="row">
+			<h1>Random</h1>
+			<div class="column">
+				<table >
+				<tr>
+					<td><label for="numIntegers">Min:</label></td>
+					<td><input type="number" id="numMin" placeholder="Enter a min"></td>
+				</tr>
+				<tr>
+					<td><label for="numIntegers">Max:</label></td>
+					<td><input type="number" id="numMax" placeholder="Enter a max"></td>
+				</tr>
+			</div>
+			<div class="column"></div>
+			<div class="column"></div>
+		</div>
+		<table >
+			<tr>
+				<td><button onclick="SetListRandom()">Set</button></td>
+				<td><button onclick="Random()", id="showRandom">Random</button></td>
+			</tr>
+		</table >		
+		<div id="integerList"></div>
+		<div id="randomValue"></div>
+		<script>
+			displayList(); // Initial display of the empty list
+			displayRandomValue(); // Initial display of the empty list
+		</script>
+	</body>
 </html>
