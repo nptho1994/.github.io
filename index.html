@@ -1,17 +1,17 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>    
-    <title>Test game</title>
-  </head>
-
-  <body>
-    Test game
-    Test game
-    Test game
-    Test game
-
-  </body>
-
+<html>
+<head>
+  <title>Random Number Generator</title>
+  <script>
+    function generateRandomNumber() {
+      var randomNumber = Math.floor(Math.random() * 100) + 1; // Generates a random number between 1 and 100
+      document.getElementById("result").innerHTML = "Random Number: " + randomNumber;
+    }
+  </script>
+</head>
+<body>
+  <h1>Random Number Generator</h1>
+  <button onclick="generateRandomNumber()">Generate Random Number</button>
+  <p id="result"></p>
+</body>
 </html>
